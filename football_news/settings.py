@@ -31,7 +31,14 @@ SECRET_KEY = 'django-insecure-_@&$wr86#hj1cv2r41wpzshs106gys9#nq64oxqh4c)q^3!hg=
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "amberley-vidya41-footballnews.pbp.cs.ui.ac.id"]
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "amberley-vidya41-footballnews.pbp.cs.ui.ac.id", "10.0.2.2"]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://amberley-vidya41-footballnews.pbp.cs.ui.ac.id"
@@ -45,7 +52,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'main'
+    'main',
+    'authentication',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -57,7 +66,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware', #Tambahkan tepat di bawah SecurityMiddleware
+    'whitenoise.middleware.WhiteNoiseMiddleware', 
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'football_news.urls'
